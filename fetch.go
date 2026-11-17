@@ -138,7 +138,7 @@ func defaultClient(pageURL string) *http.Client {
 		host = u.Host
 	}
 	transport, ok := http.DefaultTransport.(*http.Transport)
-	var rt http.RoundTripper = http.DefaultTransport
+	rt := http.DefaultTransport
 	if ok {
 		rt = transport.Clone()
 	}
