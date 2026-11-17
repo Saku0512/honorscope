@@ -1,0 +1,23 @@
+name: Live profile parse
+
+on:
+  schedule:
+    # Weekly, Monday 06:17 UTC. Two public profile documents, no ?tab= URLs.
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Parse public profiles
+        env:
+          HONORSCOPE_LIVE: "1"
+        run: go test -race -count=1 -timeout 3m -run TestLivePublicProfiles ./...
