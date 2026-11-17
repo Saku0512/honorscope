@@ -1,9 +1,10 @@
+version: "2"
+
 run:
-  timeout: 5m
   tests: true
 
 linters:
-  disable-all: true
+  default: none
   enable:
     - errcheck
     - govet
@@ -11,12 +12,11 @@ linters:
     - staticcheck
     - unused
     - misspell
+  settings:
+    misspell:
+      ignore-rules:
+        - honorscope
+
+formatters:
+  enable:
     - gofmt
-
-linters-settings:
-  misspell:
-    ignore-words:
-      - honorscope
-
-issues:
-  exclude-use-default: false
